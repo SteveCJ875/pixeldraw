@@ -28,13 +28,13 @@ function makeGrid(){
     $(".grid").append(cell)}
 }
 function onPaletteClick(){
-    $('.active').removeClass()
     $('.palette button').click(function onPaletteClick(){
+    
         const targetElement = $(this);
 
         $(targetElement).addClass('active').siblings().removeClass('active')
 
-        $('.palette button').click(onPaletteClick);
+    
     })
 
 }
@@ -47,13 +47,16 @@ function onGridClick(){
 
 
 function onFillEmptyClick(){
-    const elements = $('.grid')
+    const elements = $('.grid .cell')
 
-    for (let index = 0; index < palette.length; index = index + 1) {
+    let activeColor = $('.active').css('background-color');
+    for (let index = 0; index < elements.length; index = index + 1) {
       let nextElement = $( elements[index] );
-   
-      let activeColor = $('.active').css('background-color');
-      $(nextElement).css('background-color',activeColor)
+      console.log(nextElement.css('background-color'))
+        if (nextElement.css('background-color') == 'rgba(0, 0, 0, 0)'){
+            nextElement.css('background-color',activeColor)
+        }
+
     }
 }
 function onFillAllClick(){
@@ -61,8 +64,7 @@ function onFillAllClick(){
     $('.grid .cell').css('background-color',activeColor)
 }
 function onClearCLick(){
-        $('.grid .cell').css('background-color','');
-
+        $('.grid .cell').css('background-color','rgba(0, 0, 0, 0)')
         console.log("hey")
 }
 makePalette()
